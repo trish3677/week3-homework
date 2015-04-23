@@ -4,6 +4,11 @@ Place
   admission: integer
   description: text
 
+Review
+  short_title: string
+  rating: integer
+  placeid: integer
+
 
 # Example table for a typical Book model.
 #

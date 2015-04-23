@@ -11,13 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20150423130744) do
 
   create_table "places", force: true do |t|
     t.string  "title"
     t.string  "photo"
     t.integer "admission"
     t.text    "description"
+  end
+
+  create_table "reviews", force: true do |t|
+    t.string  "short_title"
+    t.integer "rating"
+    t.integer "placeid"
   end
 
 end

@@ -5,6 +5,9 @@
     padding: 6px;
     text-align: center;
   }
+   h2 {
+    text-align: center;
+  }
   .rating {
     color: gray;
     border: solid 1px gray;
@@ -14,7 +17,7 @@
     float: left;
     margin-right: 40px;
     box-shadow: 8px 8px 4px gray;
-    width: 200px;
+    width: 300px;
   }
   p {
     margin-top: 24px;
@@ -24,11 +27,29 @@
 
 <h2><%= @title %></h2>
 
-<p>
+<h3>
   <%= image_tag @photo %> 
-  Admission Price:  $<%= @admission%>
-      Description: <%= @description%>
-     <form action= "/places/<%= @id%>/edit">
+  Admission Price:  <%= number_to_currency(@admission) %>
+  Description: <%= @description%>
+    <form action= "/places/<%= @id%>/edit">
       <button>Edit</button>
-     </form>
-   </p>
+    </form>
+  </h3>
+<p>
+    <form action= "/places/<%= @id%>/addreview " >
+      <h3>Add Review Form:</h3>
+    Rating:
+     <input type ="integer" name="rating" value="">
+    <br> Short Description: 
+      <input type ="string" name="short_title" value="">
+    <br><br>
+      <button>Submit Review</button>
+    </form>
+
+  <%@reviews.each do |review| %>
+    <br> Rating: <%=review[:rating] %>
+    <br> Short Description: <%= review[:short_title] %> <br>
+  <%end%>
+</p>
+
+

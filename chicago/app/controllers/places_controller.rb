@@ -1,3 +1,4 @@
+#patricia corvino
 class PlacesController < ApplicationController
 
   def index
@@ -6,6 +7,8 @@ class PlacesController < ApplicationController
  
   def show  
    @p= Place.find_by(:id => params["id"]) 
+   @tempreviews= Review.where(placeid: params["id"])
+   @reviews = @tempreviews.sort_by{|review| review[:placeid]}.reverse
     if @p != nil
       @title = @p.title
       @photo = @p.photo
@@ -32,7 +35,10 @@ class PlacesController < ApplicationController
 
   def create
     @inserttitle = params[:newtitle]
-    Place.create(title: @inserttitle)
+    @photo = params[:newphoto]
+    @admission=params[:newprice] 
+    @description = params[:newdescription]
+    Place.create(title: @inserttitle, photo: @photo, admission: @admission, description: @description)
     redirect_to "/places"
   end
 
@@ -49,14 +55,24 @@ class PlacesController < ApplicationController
     end
   end
 
-  def update
+   def update
     @update_place = Place.find_by(:title => params["updatetitle"])
     @update_place.photo = params[:updatephoto]
     @update_place.admission = params[:updateprice]
     @update_place.description = params[:updatedescription]
     @update_place.save
-    redirect_to "/places/:id"
+    num = @update_place.id
+    redirect_to "/places/#{num}"
   end
+
+  def addreview
+    @rating = params[:rating]
+    @short_title = params[:short_title]
+    @placeid = params[:id]
+    Review.create(rating: @rating, short_title: @short_title, placeid: @placeid)
+    redirect_to "/places/#{@placeid}"
+  end
+
 
 
 end

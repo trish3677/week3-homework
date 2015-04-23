@@ -7,7 +7,7 @@
   <% @places.each do |place| %>
     <li>
       <%= link_to place[:title], "/places/#{place[:id]} "%>
-      Admission Price:  $<%= place[:admission]%>
+      Admission Price:  <%= number_to_currency(place[:admission])%>
       <span>Description: <%= place[:description]%> </span>
       <%= link_to "Delete", "/places/#{place[:id]}/delete" %>
     </li>
