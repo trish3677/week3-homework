@@ -1,0 +1,16 @@
+<ul>
+ <form action= "/places/new">
+  	<button>Add a new place</button>
+		</form>
+
+
+  <% @places.each do |place| %>
+    <li>
+      <%= link_to place[:title], "/places/#{place[:id]} "%>
+      Admission Price:  $<%= place[:admission]%>
+      <span>Description: <%= place[:description]%> </span>
+      <%= link_to "Delete", "/places/#{place[:id]}/delete" %>
+    </li>
+   <% end %>
+
+</ul>
